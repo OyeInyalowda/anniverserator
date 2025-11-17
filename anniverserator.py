@@ -8,10 +8,10 @@ from datetime import date
 """
 Anniverserator, never forget how long you've been married again!
 
-Anniverserator is a small python program that will hopefully one day be a small command line utility for persistent tracking of important dates 
+Anniverserator is a small python program that will hopefully one day be a small command line utility for persistent tracking of important dates. 
 
 Author: Mike Vance
-Version: 20251117
+Version: 0.2
 """
 
 # done create an Event class which holds a title and date
@@ -35,7 +35,7 @@ class Event:
 
         print(f"********** {self.eventName} **********")
 
-    def print_ellapsed_days(self):
+    def print_elapsed_days(self):
         """print the days ellapsed between the event and today"""
 
         # calculate
@@ -44,19 +44,19 @@ class Event:
         # print results
         print(f"{ellapsedDays.days} total day(s) since {self.eventDate}")
 
-    def print_ellapsed_years(self):
-        """print the years ellapsed between the event and today"""
+    def print_elapsed_years(self):
+        """print the years elapsed between the event and today"""
 
         # calculate
-        ellapsedDays = date.today() - self.eventDate
-        ellapsedYears = ellapsedDays.days / 365
-        remainder = ellapsedDays.days % 365
+        elapsedDays = date.today() - self.eventDate
+        elapsedYears = elapsedDays.days / 365
+        remainder = elapsedDays.days % 365
 
         # print results
         if(remainder > 0):
-            print(f"{math.floor(ellapsedYears)} year(s) and {remainder} day(s) since {self.eventDate}")
+            print(f"{math.floor(elapsedYears)} year(s) and {remainder} day(s) since {self.eventDate}")
         else:
-            print(f"{math.floor(ellapsedYears)} year(s) since {self.eventDate}")
+            print(f"{math.floor(elapsedYears)} year(s) since {self.eventDate}")
 
     def print_next_occurrence(self):
         """print the date of next occurrence and days until then"""
@@ -150,8 +150,8 @@ def main():
     #print
     if(args.Print):
         event.print_title()
-        event.print_ellapsed_years()
-        event.print_ellapsed_days()
+        event.print_elapsed_years()
+        event.print_elapsed_days()
         event.print_next_occurrence()
 
 if __name__ == "__main__":
