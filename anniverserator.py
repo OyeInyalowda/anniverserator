@@ -1,6 +1,8 @@
 import argparse
 import math
 
+from datetime import MAXYEAR
+from datetime import MINYEAR
 from datetime import date
 
 """
@@ -9,7 +11,7 @@ Anniverserator, never forget how long you've been married again!
 Anniverserator is a small python program that will hopefully one day be a small command line utility for persistent tracking of important dates 
 
 Author: Mike Vance
-Version: 20251116
+Version: 20251117
 """
 
 # done create an Event class which holds a title and date
@@ -17,6 +19,8 @@ Version: 20251116
 # done calculate time elapsed from date to current time
 # TODO save user provided event to file
 # TODO read user provided event from file
+# TODO create_event() does not handle leap years properly
+# TODO create_event does not handle string inputs for months
 # done calculate time until next anniversary
 
 class Event:
@@ -72,31 +76,78 @@ class Event:
         print(f"{self.eventName} occurs next on {futureDate} in {daysUntil.days} day(s)")
 #---------- End Event Class ----------#
 
+def handle_file():
+    return
+
+def create_event() -> Event:
+    """Create a new event from user input"""
+
+    print("**** Create New Anniverserator Event ****")
+    print("*   Valid inputs:                       *")                    
+    print("*       Title: any                      *")
+    print("*       Year: 0 < Year <= 9999          *")
+    print("*       Month: 0 < Month <= 12          *")
+    print("*       Day: 0 < Day <= # days in month *")
+    print("*****************************************")
+
+    response = ''
+    while(response != 'y'):
+        #get title
+        title = input("Event title? ")
+
+        # get year
+        yearStr = input("Event year? ")
+        year = int(yearStr)
+        while year < MINYEAR or year > MAXYEAR:
+            yearStr = input(f"Invalid year. Please enter a value between {MINYEAR} and {MAXYEAR}: ")
+            year = int(yearStr)
+        
+        # get month
+        monthStr = input("Event month (1 - 12)? ")
+        month = int(monthStr)
+        while month < 1 or month > 12:
+            monthStr = input(f"Invalid month. Please enter a value between 1 and 12: ")
+            month = int(monthStr)
+
+        # get month
+        dayStr = input("Event day? ")
+        day = int(dayStr)
+        valid = False
+        while not valid:
+            try:
+                eventDate = date(year, month, day)
+                valid = True
+            except:
+                dayStr = input(f"Invalid day. Please enter a value between in range for the given month: ")
+                day = int(dayStr)
+
+        # ask if correct
+        print(f"\nEvent Title: {title} | Event Date: {eventDate}")
+        response = input("Is this correct (y/n)? ")
+    
+    newEvent = Event(title, eventDate)
+    return newEvent
+
 def main():
     # args and options
     description = "Anniverserator, never forget how long you've been married again!"
     parser = argparse.ArgumentParser(description)
-    parser.add_argument("-n", "--Name", 
-                        nargs = "*",
-                        type  = str,
-                        metavar = " ",
-                        help  = "New event name. Ex: Our Anniversary")
-    parser.add_argument("-d", "--Date", 
-                        nargs = 3, 
-                        type  = int,
-                        metavar = " ",
-                        help  = "New event date. Ex: 1901 01 01")
+    parser.add_argument("-n", "--New",
+                        action = 'store_true', 
+                        help  = "Create a new event.")
     parser.add_argument("-p", "--Print",
                         action = 'store_true', 
                         help  = "Print event facts")
 
     #parse args
     args = parser.parse_args()    
-    # TODO error check date
-    eventDate = date(args.Date[0], args.Date[1], args.Date[2])
-    eventName = " ".join(args.Name)
-    event = Event(eventName, eventDate)
 
+    if (args.New):
+        event = create_event()
+    else:
+        event = Event()
+
+    #print
     if(args.Print):
         event.print_title()
         event.print_ellapsed_years()
