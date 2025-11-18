@@ -1,5 +1,6 @@
 import argparse
 import math
+import pickle
 
 from datetime import MAXYEAR
 from datetime import MINYEAR
@@ -39,10 +40,10 @@ class Event:
         """print the days ellapsed between the event and today"""
 
         # calculate
-        ellapsedDays = date.today() - self.eventDate
+        elapsedDays = date.today() - self.eventDate
         
         # print results
-        print(f"{ellapsedDays.days} total day(s) since {self.eventDate}")
+        print(f"{elapsedDays.days} total day(s) since {self.eventDate}")
 
     def print_elapsed_years(self):
         """print the years elapsed between the event and today"""
@@ -76,8 +77,15 @@ class Event:
         print(f"{self.eventName} occurs next on {futureDate} in {daysUntil.days} day(s)")
 #---------- End Event Class ----------#
 
-def handle_file():
-    return
+#TODO the param for this should be an array of events
+def save(event):
+    try:
+        with open("events.pickle", "wb") as file:
+            pickle.dump(event, file, protocol=pickle.HIGHEST_PROTOCOL)
+    except Exception as ex:
+        print("Error while pickling object", ex)
+
+    return #TODO return bool
 
 def create_event() -> Event:
     """Create a new event from user input"""
