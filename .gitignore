@@ -1,3 +1,4 @@
 /.venv
 events.pickle
 .vscode/launch.json
+__pycache__/event.cpython-310.pyc
