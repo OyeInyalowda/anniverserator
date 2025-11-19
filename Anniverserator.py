@@ -68,21 +68,33 @@ def create_events(events: list) -> list :
 
         # get year
         yearStr = input("Event year? ")
-        year = int(yearStr)
+        try:
+            year = int(yearStr)
+        except Exception as ex:
+            year = -1
+
         while year < MINYEAR or year > MAXYEAR:
             yearStr = input(f"Invalid year. Please enter a value between {MINYEAR} and {MAXYEAR}: ")
             year = int(yearStr)
         
         # get month
         monthStr = input("Event month (1 - 12)? ")
-        month = int(monthStr)
+        try:
+            month = int(monthStr)
+        except Exception as ex:
+            month = -1
+
         while month < 1 or month > 12:
             monthStr = input(f"Invalid month. Please enter a value between 1 and 12: ")
             month = int(monthStr)
 
         # get month
         dayStr = input("Event day? ")
-        day = int(dayStr)
+        try:
+            day = int(dayStr)
+        except Exception as ex:
+            year = -1
+
         valid = False
         while not valid:
             try:
