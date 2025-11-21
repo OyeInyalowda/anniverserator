@@ -44,6 +44,14 @@ def load(filename: str) -> list:
 
 def create_events(events: list) -> list :
 
+    print("**** Create New Anniversarator Event ****")
+    print("*   Valid inputs:                       *")                    
+    print("*       Title: any                      *")
+    print("*       Year: 0 < Year <= 9999          *")
+    print("*       Month: 0 < Month <= 12          *")
+    print("*       Day: 0 < Day <= # days in month *")
+    print("*****************************************")
+
     # outer loop - while anotherEvent
     anotherEvent = True
     while(anotherEvent):
@@ -135,10 +143,7 @@ def main():
 
     if(args.Print and events):
         for event in events: 
-            event.print_title()
-            event.print_elapsed_years()
-            event.print_elapsed_days()
-            event.print_next_occurrence()
+            event.print_event()
     elif(args.Print and not events):
         print("Uh oh :( No events to print")
         print("Try running Anniversarator again with the -n flag to add new events!")
