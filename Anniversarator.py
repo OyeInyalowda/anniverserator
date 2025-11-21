@@ -8,9 +8,9 @@ from datetime import date
 from Event import Event
 
 """
-Anniverserator, never forget how long you've been married again!
+Anniversarator, never forget how long you've been married again!
 
-Anniverserator is a small python program that will hopefully one day be a small command line utility for persistent tracking of important dates. 
+Anniversarator is a small python program that will hopefully one day be a small command line utility for persistent tracking of important dates. 
 
 Author: Mike Vance
 Version: 0.4
@@ -111,7 +111,7 @@ def main():
 
     #------------ Handle Args ------------#
     # args and options
-    description = "Anniverserator, never forget how long you've been married again!"
+    description = "Anniversarator, never forget how long you've been married again!"
     parser = argparse.ArgumentParser(description)
     parser.add_argument("-n", "--New",
                         action = "store_true", 
@@ -124,7 +124,7 @@ def main():
     args = parser.parse_args()    
 
 
-    #------ Anniverserator Behavior ------#
+    #------ Anniversarator Behavior ------#
     # check for existing events
     events = load(FILENAME)
 
@@ -141,8 +141,8 @@ def main():
             event.print_next_occurrence()
     elif(args.Print and not events):
         print("Uh oh :( No events to print")
-        print("Try running Anniverserator again with the -n flag to add new events!")
-        
+        print("Try running Anniversarator again with the -n flag to add new events!")
+          
 if __name__ == "__main__":
     main()
 

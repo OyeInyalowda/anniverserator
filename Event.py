@@ -10,13 +10,19 @@ class Event:
         self.eventName = eventName
         self.eventDate = eventDate
 
+    def print_event(self):
+            self.print_title()
+            self.print_elapsed_years()
+            self.print_elapsed_days()
+            self.print_next_occurrence()
+            
     def print_title(self):
         """print event title"""
 
         print(f"\n********** {self.eventName} **********")
 
     def print_elapsed_days(self):
-        """print the days ellapsed between the event and today"""
+        """print the days elapsed between the event and today"""
 
         # calculate
         elapsedDays = date.today() - self.eventDate
@@ -54,8 +60,6 @@ class Event:
 
         #print results
         print(f"{self.eventName} occurs next on {futureDate} in {daysUntil.days} day(s)")
-
-
 
 
     def check_year(self, yearStr: str) -> bool:
