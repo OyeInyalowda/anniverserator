@@ -16,10 +16,10 @@ Anniversarator is a small python command line utility for persistent tracking of
 Author: Mike Vance
 """
 
-logDir = Path.home() / "anniversarator" / "logs"
+logDir = Path.home() / ".anniversarator" / "logs"
 logDir.mkdir(parents=True, exist_ok=True)
 logFile = logDir / "debug.log"
-saveDir = Path.home() / "anniversarator" / "saves"
+saveDir = Path.home() / ".anniversarator" / "saves"
 saveDir.mkdir(parents=True, exist_ok=True)
 saveFile = saveDir / "events.pickle"
 
