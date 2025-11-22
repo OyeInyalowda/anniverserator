@@ -2,6 +2,7 @@ import argparse
 import pickle
 import logging
 
+from pathlib import Path
 from datetime import date
 from datetime import MAXYEAR
 from datetime import MINYEAR
@@ -15,8 +16,15 @@ Anniversarator is a small python command line utility for persistent tracking of
 Author: Mike Vance
 """
 
+logDir = Path.home() / "anniversarator" / "logs"
+logDir.mkdir(parents=True, exist_ok=True)
+logFile = logDir / "debug.log"
+saveDir = Path.home() / "anniversarator" / "saves"
+saveDir.mkdir(parents=True, exist_ok=True)
+saveFile = saveDir / "events.pickle"
+
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='logs/debug.log', encoding='utf-8', level=logging.INFO, format="%(asctime)s %(message)s")
+logging.basicConfig(filename=str(logFile), encoding='utf-8', level=logging.INFO, format="%(asctime)s %(message)s")
 
 def __save(events: dict[str, Event], filename: str) -> bool:
     """Save the given event using the pickle module."""
@@ -158,6 +166,7 @@ def __delete_events(events: dict[str, Event]) -> dict[str, Event]:
 def main():
     FILENAME = "saves/events.pickle"
 
+
     #------------ Handle Args ------------#
     # args and options
     description = "Anniversarator, never forget how long you've been married again!"
@@ -177,16 +186,16 @@ def main():
 
     #------ Anniversarator Behavior ------#
     # check for existing events
-    events = __load(FILENAME)
+    events = __load(str(saveFile))
 
     if(args.delete):
         __delete_events(events)
-        __save(events, FILENAME)
+        __save(events, str(saveFile))
 
     # execute according to arguments
     if(args.new):
         events = create_events(events)
-        __save(events, FILENAME)
+        __save(events, str(saveFile))
 
     if(args.print and events):
         for event in events: 
