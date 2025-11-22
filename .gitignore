@@ -4,3 +4,6 @@ events.pickle
 __pycache__/event.cpython-310.pyc
 logs/debug.log
 __pycache__/Event.cpython-312.pyc
+src/anniversarator/__pycache__/__init__.cpython-312.pyc
+src/anniversarator/__pycache__/Anniversarator.cpython-312.pyc
+src/anniversarator/__pycache__/Event.cpython-312.pyc
